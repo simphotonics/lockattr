@@ -1,12 +1,11 @@
 # Locking Attributes Python
 [![tests](https://github.com/simphotonics/lockattrs/actions/workflows/tests.yml/badge.svg)](https://github.com/simphotonics/lockattrs/actions/workflows/tests.yml)
-<!-- [![Python](https://simphotonics.com/images/docs-badge.svg)](https://generic-validation.simphotonics.com) -->
+[![docs](https://github.com/simphotonics/lockattrs/images/docs-badge.svg)](https://lockattrs.simphotonics.com)
 
-Most object oriented languages like C, C++, Java, Dart, Kotlin,
-include visibiliy modifiers and
-variables and functions can be declared `private`.
-This enables encapsulation where e.g. the inner workings of a class
-are detached from the outside world and thus protected from
+Most object oriented languages (C++, Java, Dart, Kotlin, Swift)
+include visibiliy modifiers. This enables
+encapsulation where for example the inner workings of a class
+can be detached from the outside world and thus protected from
 direct modification.
 
 Python on the other hand does not have a language-backed concept
@@ -17,7 +16,7 @@ relied upon since they may change in a future version of the module.
 
 In some cases, certain attributes may be crucial for the
 correct working a class and the programmer might
-want to pervent inadverted modification.
+want to pervent any inadvertent modification.
 
 The package [`lockattrs`][lockattrs] provides a decorator that can
 be used with the method `__setattr__` to lock certain attributes
@@ -46,10 +45,11 @@ instance attributes of a meta-class is equivalent to
 locking the class attributes of the class (the meta-class instance).
 
 Using the decorator `lockattrs` involves the following steps:
+
 1. Declare a class or meta-class.
-2. Override the method `__setattr__`
+2. Override the method `__setattr__`.
 3. Decorate `__setattr__` with the function `lockattrs`.
-4. Optionally specify which attributes should be locked and
+4. Optionally: Specify which attributes should be locked and
    what type of error should be raised during an attribute
    modification attempt.
 
@@ -69,10 +69,10 @@ class A(metaclass=AMeta):
     pass
 
 A.data = 'initial-data' # First initiation is OK. Attribute 'data' is now locked.
-A.data = 'new-data'     # Raises an error (default type: ProtectedAttributeError)
+A.data = 'new-data'     # Raises an error (default type: ProtectedAttributeError).
 
 A.name = 'A'
-A.name = 'A1' # OK since the attribute 'name' is not locked.
+A.name = 'A1'           # OK, since the attribute 'name' is not locked.
 ```
 
 Note: Locking certain attributes may be prohibitively
@@ -82,7 +82,7 @@ instantiated often (for example in a loop)
 and where attributes are set/modified frequently.
 
 The benchmarks below were produced using the package
-[`pytest-benchmark][pytest-benchmark] on a PC with 32GB RAM
+[`pytest-benchmark`][pytest-benchmark] on a PC with 32GB RAM
 and an Intel Core i5-6260U CPU running at 1.80GHz.
 As the mean runtimes show, setting an attribute of class `A`
 takes approximately 40 times as long compared to a standard class
