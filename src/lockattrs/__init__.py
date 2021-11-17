@@ -1,3 +1,5 @@
-'''
-Module providing the decorator function `lockattrs`.
-'''
+"""
+Module providing the decorator function `protect`.
+"""
+
+from .decorators import protect

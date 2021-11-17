@@ -1,4 +1,4 @@
-""" Provides the decorator `lockattrs`. It is used to annotate the
+""" Provides the decorator `protect`. It is used to annotate the
     class method `__setattr__` in order to prevent attribute
     modificaton.
 
@@ -14,7 +14,7 @@ class ProtectedAttributeError(AttributeError):
     """Error indicating an attempted modification of a protected attribute."""
 
 
-def lockattrs(
+def protect(
     attr_names: Iterable[str] = (),
     error_type: Exception = ProtectedAttributeError,
 ):
