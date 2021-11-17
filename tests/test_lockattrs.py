@@ -2,7 +2,7 @@ from random import randint
 from typing import Any
 
 import pytest
-from lockattrs.decorators import ProtectedAttributeError, protect
+from lockattrs import ProtectedAttributeError, protect
 
 
 class AMeta(type):

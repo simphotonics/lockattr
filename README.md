@@ -36,7 +36,7 @@ $ pip install lockattrs
 
 ## Usage
 
-This package provides the function `lockattrs` which can be
+This package provides the function `protect` which can be
 used to prevent modification of attributes
 after they have been initially set.
 
@@ -44,23 +44,23 @@ The intended use-case is demonstrated below. Locking the
 instance attributes of a meta-class is equivalent to
 locking the class attributes of the class (the meta-class instance).
 
-Using the decorator `lockattrs` involves the following steps:
+Using the decorator `protect` involves the following steps:
 
 1. Declare a class or meta-class.
 2. Override the method `__setattr__`.
-3. Decorate `__setattr__` with the function `lockattrs`.
+3. Decorate `__setattr__` with the function `protect`.
 4. Optionally: Specify which attributes should be locked and
    what type of error should be raised during an attribute
    modification attempt.
 
 ``` Python
-import lockattrs
+from lockattrs import protect
 
 class AMeta(type):
     """
     Meta class of A.
     """
-    @lockattrs(('data','id'), )
+    @protect(('data','id'), )
     def __setattr__(self, name: str, value: Any) -> None:
         return super().__setattr__(name, value)
 
