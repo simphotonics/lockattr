@@ -1,5 +1,5 @@
 # Locking Attributes Python
-[![tests](https://github.com/simphotonics/lockattrs/actions/workflows/test.yml/badge.svg)](https://github.com/simphotonics/lockattrs/actions/workflows/test.yml)
+[![tests](https://github.com/simphotonics/lockattrs/actions/workflows/tests.yml/badge.svg)](https://github.com/simphotonics/lockattrs/actions/workflows/tests.yml)
 <!-- [![Python](https://simphotonics.com/images/docs-badge.svg)](https://generic-validation.simphotonics.com) -->
 
 In most object oriented languages like C++, Java, Dart, Kotlin,
