@@ -1,6 +1,6 @@
 # Locking Attributes Python
 [![tests](https://github.com/simphotonics/lockattrs/actions/workflows/tests.yml/badge.svg)](https://github.com/simphotonics/lockattrs/actions/workflows/tests.yml)
-[![docs](https://github.com/simphotonics/lockattrs/raw/main/images/docs-badge.svg)](https://lockattrs.simphotonics.com)
+[![docs](https://github.com/simphotonics/lockattrs/blob/master/images/docs-badge.svg)](https://lockattrs.simphotonics.com)
 
 Most object oriented languages (C++, Java, Dart, Kotlin, Swift)
 include visibiliy modifiers. This enables
