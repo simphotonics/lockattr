@@ -1,6 +1,6 @@
 # Locking Attributes Python
 [![tests](https://github.com/simphotonics/lockattrs/actions/workflows/tests.yml/badge.svg)](https://github.com/simphotonics/lockattrs/actions/workflows/tests.yml)
-[![docs](https://github.com/simphotonics/lockattrs/blob/master/images/docs-badge.svg)](https://lockattrs.simphotonics.com)
+[![docs](https://raw.githubusercontent.com/simphotonics/lockattrs/main/images/docs-badge.svg)](https://lockattrs.simphotonics.com)
 
 Most object oriented languages (C++, Java, Dart, Kotlin, Swift)
 include visibiliy modifiers. This enables
@@ -36,7 +36,7 @@ $ pip install lockattrs
 
 ## Usage
 
-This package provides the function `protect` which can be
+This package provides the decorator function [`protect`][protect] which can be
 used to prevent modification of attributes
 after they have been initially set.
 
@@ -44,11 +44,11 @@ The intended use-case is demonstrated below. Locking the
 instance attributes of a meta-class is equivalent to
 locking the class attributes of the class (the meta-class instance).
 
-Using the decorator `protect` involves the following steps:
+Using the decorator [`protect`][protect] involves the following steps:
 
 1. Declare a class or meta-class.
 2. Override the method `__setattr__`.
-3. Decorate `__setattr__` with the function `protect`.
+3. Decorate `__setattr__` with the function [`protect`][protect].
 4. Optionally: Specify which attributes should be locked and
    what type of error should be raised during an attribute
    modification attempt.
@@ -107,6 +107,8 @@ Contributions are welcome.
 [issue tracker]: https://github.com/simphotonics/lockattrs/issues
 
 [attrs]: https://pypi.org/project/attrs
+
+[protect]: http://lockattrs.simphotonics.com/reference/lockattrs/decorators/#protect
 
 [pypi]: https:://pypi.org
 
