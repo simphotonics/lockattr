@@ -1,4 +1,4 @@
-# Locking Attributes Python
+# Locking Class Attributes
 [![tests](https://github.com/simphotonics/lockattrs/actions/workflows/tests.yml/badge.svg)](https://github.com/simphotonics/lockattrs/actions/workflows/tests.yml)
 [![docs](https://raw.githubusercontent.com/simphotonics/lockattrs/main/images/docs-badge.svg)](https://lockattrs.simphotonics.com)
 
