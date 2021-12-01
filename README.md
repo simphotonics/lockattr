@@ -105,6 +105,10 @@ B.id = 28               # OK. Class attributes are not locked.
 # Creating an instance of B.
 b = B()
 
+b.id = 77               # Modification of the attribute 'id' via 'self' raises
+                        # an error since the annotated method `__setattr__` is
+                        # called. 
+
 b.data = 'initial-data' # First initiation is OK. Attribute 'data' is now locked.
 b.data = 'new-data'     # Raises an error (default type: ProtectedAttributeError).
 
