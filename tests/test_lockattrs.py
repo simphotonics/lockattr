@@ -40,6 +40,7 @@ class C:
     """
     Default class without locked attributes.
     """
+
     pass
 
 
@@ -69,12 +70,21 @@ class TestLockAttrs:
             setattr(B, new_var_name, "initial-data")
             setattr(B, new_var_name, "overwrite initial-data")
 
+    def test_error_message(self):
+        try:
+            B.data = 98
+        except ProtectedAttributeError as error:
+            assert (
+                error.__str__()
+                == "Class attribute 'data' must not be modified."
+            )
+
     def test_benchmark_set_attrs(self, benchmark):
         def test():
             C.name = "hello"
             return C.name
 
-        benchmark.pedantic(test, iterations=20000, rounds=4)
+        benchmark.pedantic(test, iterations=2000, rounds=5)
         assert C.name == "hello"
 
     def test_benchmark_set_attrs_A(self, benchmark):
@@ -82,5 +92,5 @@ class TestLockAttrs:
             A.name = "hello"
             return A.name
 
-        benchmark.pedantic(test, iterations=20000, rounds=4)
+        benchmark.pedantic(test, iterations=2000, rounds=5)
         assert A.name == "hello"

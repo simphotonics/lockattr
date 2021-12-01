@@ -49,7 +49,7 @@ def protect(
             ) and hasattr(mapped_kwargs["self"], mapped_kwargs["name"]):
                 # mapped_kwargs['name'] in mapped_kwargs['self'].__dict__:
                 raise error_type(
-                    f"Class attribute `{mapped_kwargs['name']}"
+                    f"Class attribute '{mapped_kwargs['name']}' "
                     "must not be modified."
                 )
 
