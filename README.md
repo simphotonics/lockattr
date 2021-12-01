@@ -40,13 +40,15 @@ This package provides the decorator function [`protect`][protect] which can be
 used to prevent modification of attributes
 after they have been initially set.
 
+### 1. Locking Class Attributes
+
 The intended use-case is demonstrated below. Locking the
 instance attributes of a meta-class is equivalent to
 locking the class attributes of the class (the meta-class instance).
 
 Using the decorator [`protect`][protect] involves the following steps:
 
-1. Declare a class or meta-class.
+1. Declare a meta-class.
 2. Override the method `__setattr__`.
 3. Decorate `__setattr__` with the function [`protect`][protect].
 4. Optionally: Specify which attributes should be locked and
@@ -76,6 +78,42 @@ A.data = 'new-data'     # Raises an error (default type: ProtectedAttributeError
 A.name = 'A'
 A.name = 'A1'           # OK, since the attribute 'name' is not locked.
 ```
+
+### 2. Locking Instance Attributes
+
+The code below demonstrates how to use the decorator
+function `@protect` to lock certain attributes of a class instance.
+
+``` Python
+from lockattrs import protect
+
+class B():
+    """
+    Sample class with locked attributes.
+    """
+    id = 57
+
+    @protect(('data','id'), ) # To lock all attributes use: @protect()
+    def __setattr__(self, name: str, value: Any) -> None:
+        return super().__setattr__(name, value)
+
+
+
+B.id = 28               # OK. Class attributes are not locked.
+                        # To lock class attributes see section above.
+
+# Creating an instance of B.
+b = B()
+
+b.data = 'initial-data' # First initiation is OK. Attribute 'data' is now locked.
+b.data = 'new-data'     # Raises an error (default type: ProtectedAttributeError).
+
+b.name = 'b'
+b.name = 'b1'           # OK, since the attribute 'name' is not locked.
+```
+
+
+## Performance
 
 Note: Locking certain attributes may be prohibitively
 costly in terms of computational time
