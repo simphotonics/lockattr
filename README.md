@@ -65,8 +65,10 @@ class AMeta(type):
         return super().__setattr__(name, value)
 
 class A(metaclass=AMeta):
-    data = 'crucial-data'
+    id = 'a01'
     pass
+
+A.id = 'b02'            # Raises an error. Attribute 'id' is set and locked.
 
 A.data = 'initial-data' # First initiation is OK. Attribute 'data' is now locked.
 A.data = 'new-data'     # Raises an error (default type: ProtectedAttributeError).
