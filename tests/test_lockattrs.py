@@ -44,6 +44,26 @@ class C:
     pass
 
 
+class D:
+    """
+    Class with locked instance attributes.
+    """
+
+    @protect(("id", "data"))
+    def __setattr__(self, name: str, value: Any) -> None:
+        return super().__setattr__(name, value)
+
+
+class E:
+    """
+    Class with all instance attributes locked.
+    """
+
+    @protect()
+    def __setattr__(self, name: str, value: Any) -> None:
+        return super().__setattr__(name, value)
+
+
 class TestLockAttrs:
     def test_set_new_attr(self):
         A.name = "A"
@@ -94,3 +114,47 @@ class TestLockAttrs:
 
         benchmark.pedantic(test, iterations=2000, rounds=5)
         assert A.name == "hello"
+
+
+class TestLockInstanceAttrs:
+    def test_set_new_attr(self):
+        d = D()
+        d.name = "d"
+        assert d.name == "d"
+
+        # Attribute name is not locked.
+        d.name = "d1"
+        assert d.name == "d1"
+
+        d.data = "crucial-data-of-d"
+        # Attribute data is locked.
+        assert d.data == "crucial-data-of-d"
+
+    def test_lock_attr(self):
+        d = D()
+        d.data = "data-of-d"
+        with pytest.raises(ProtectedAttributeError):
+            # Attribute data is locked.
+            d.data = "other data"
+
+    def test_lock_all_attrs(self):
+        e = E()
+        e.data = "one"
+        with pytest.raises(ProtectedAttributeError):
+            e.data = "overwrite data"
+
+        with pytest.raises(ProtectedAttributeError):
+            new_var_name = f"b{randint(0, 1000)}"
+            setattr(e, new_var_name, "initial-data")
+            setattr(e, new_var_name, "overwrite initial-data")
+
+    def test_error_message(self):
+        d = D()
+        d.data = 1
+        try:
+            d.data = 98
+        except ProtectedAttributeError as error:
+            assert (
+                error.__str__()
+                == "Class attribute 'data' must not be modified."
+            )
